@@ -6,9 +6,13 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
+import { en } from '@payloadcms/translations/languages/en'
+import { ar } from '@payloadcms/translations/languages/ar'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Settings } from './globals/Settings'
+import { HeroSlides } from './collections/HeroSlides'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -20,11 +24,32 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media],
+  globals: [Settings],
+  collections: [Users, Media, HeroSlides],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
+  },
+  i18n: {
+    fallbackLanguage: 'ar',
+    supportedLanguages: { en, ar },
+  },
+
+  localization: {
+    locales: [
+      {
+        label: 'English',
+        code: 'en',
+      },
+      {
+        label: 'Arabic',
+        code: 'ar',
+        rtl: true,
+      },
+    ],
+    defaultLocale: 'ar',
+    fallback: true,
   },
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
