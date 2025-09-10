@@ -25,10 +25,8 @@ export default function Hero({ heroSection }: HeroProps) {
 
   const [count, setCount] = useState(0)
   const dir = lang === 'ar' ? 'rtl' : 'ltr'
-  console.log({ count })
 
   const slideItems = heroSection.docs[0].heroSlides
-  console.log({ slideItems })
 
   useEffect(() => {
     if (!api) {
@@ -47,7 +45,7 @@ export default function Hero({ heroSection }: HeroProps) {
       <Carousel
         plugins={[
           Autoplay({
-            delay: 3000,
+            delay: Number(process.env.NEXT_PUBLIC_CAROUSEL_DELAY) || 2000,
           }),
         ]}
         setApi={setApi}

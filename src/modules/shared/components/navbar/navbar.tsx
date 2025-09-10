@@ -4,11 +4,11 @@ import Logo from './logo'
 import Navigation from './navigation'
 import MobileMenu from './mobile-menu'
 
-interface NavbarProps {
+interface Props {
   settings: Setting
 }
 
-export default function Navbar({ settings }: NavbarProps) {
+export default function Navbar({ settings }: Props) {
   return (
     <div className="bg-background ">
       <header className="container mx-auto px-4 flex items-center justify-between">

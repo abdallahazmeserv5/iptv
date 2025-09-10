@@ -1,12 +1,11 @@
 import { configuredPayload } from '@/actions'
 import Navbar from '@/modules/shared/components/navbar/navbar'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale } from 'next-intl/server'
 import React from 'react'
 import Providers from './providers'
 import './styles.css'
-import { QueryClient } from '@tanstack/react-query'
+import Footer from '@/modules/shared/components/footer'
 
 export const metadata = {
   description: 'A blank template using Payload in a Next.js app.',
@@ -31,6 +30,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
           <body>
             <Navbar settings={settings} />
             <main>{children}</main>
+            <Footer settings={settings} />
           </body>
           {/* <ReactQueryDevtools initialIsOpen={false} /> */}
         </NextIntlClientProvider>

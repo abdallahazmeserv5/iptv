@@ -70,6 +70,11 @@ export interface Config {
     users: User;
     media: Media;
     'hero-slides': HeroSlide;
+    packages: Package;
+    plans: Plan;
+    testimonial: Testimonial;
+    banners: Banner;
+    faq: Faq;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -79,6 +84,11 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     'hero-slides': HeroSlidesSelect<false> | HeroSlidesSelect<true>;
+    packages: PackagesSelect<false> | PackagesSelect<true>;
+    plans: PlansSelect<false> | PlansSelect<true>;
+    testimonial: TestimonialSelect<false> | TestimonialSelect<true>;
+    banners: BannersSelect<false> | BannersSelect<true>;
+    faq: FaqSelect<false> | FaqSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -186,6 +196,106 @@ export interface HeroSlide {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "packages".
+ */
+export interface Package {
+  id: string;
+  image: string | Media;
+  title?: string | null;
+  price?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "plans".
+ */
+export interface Plan {
+  id: string;
+  title?: string | null;
+  price?: number | null;
+  description?: string | null;
+  features?:
+    | {
+        feature?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonial".
+ */
+export interface Testimonial {
+  id: string;
+  testimonial?:
+    | {
+        image: string | Media;
+        reviewer?: string | null;
+        reviewerJob?: string | null;
+        review?: string | null;
+        rate?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "banners".
+ */
+export interface Banner {
+  id: string;
+  banners?:
+    | {
+        image: string | Media;
+        title?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        buttonText?: string | null;
+        /**
+         * Where to go after clicking the button?
+         */
+        buttonUrl: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faq".
+ */
+export interface Faq {
+  id: string;
+  faq?:
+    | {
+        'َquestion': string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -202,6 +312,26 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'hero-slides';
         value: string | HeroSlide;
+      } | null)
+    | ({
+        relationTo: 'packages';
+        value: string | Package;
+      } | null)
+    | ({
+        relationTo: 'plans';
+        value: string | Plan;
+      } | null)
+    | ({
+        relationTo: 'testimonial';
+        value: string | Testimonial;
+      } | null)
+    | ({
+        relationTo: 'banners';
+        value: string | Banner;
+      } | null)
+    | ({
+        relationTo: 'faq';
+        value: string | Faq;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -305,6 +435,84 @@ export interface HeroSlidesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "packages_select".
+ */
+export interface PackagesSelect<T extends boolean = true> {
+  image?: T;
+  title?: T;
+  price?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "plans_select".
+ */
+export interface PlansSelect<T extends boolean = true> {
+  title?: T;
+  price?: T;
+  description?: T;
+  features?:
+    | T
+    | {
+        feature?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonial_select".
+ */
+export interface TestimonialSelect<T extends boolean = true> {
+  testimonial?:
+    | T
+    | {
+        image?: T;
+        reviewer?: T;
+        reviewerJob?: T;
+        review?: T;
+        rate?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "banners_select".
+ */
+export interface BannersSelect<T extends boolean = true> {
+  banners?:
+    | T
+    | {
+        image?: T;
+        title?: T;
+        buttonText?: T;
+        buttonUrl?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faq_select".
+ */
+export interface FaqSelect<T extends boolean = true> {
+  faq?:
+    | T
+    | {
+        'َquestion'?: T;
+        answer?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
@@ -342,6 +550,14 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface Setting {
   id: string;
   logo: string | Media;
+  socialMedia?:
+    | {
+        socialMediaName?: string | null;
+        socialMediaLink?: string | null;
+        socialMediaImage?: (string | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -351,6 +567,14 @@ export interface Setting {
  */
 export interface SettingsSelect<T extends boolean = true> {
   logo?: T;
+  socialMedia?:
+    | T
+    | {
+        socialMediaName?: T;
+        socialMediaLink?: T;
+        socialMediaImage?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -8,5 +8,20 @@
   "welcomeAtIptv": "أهلا بك في IPTV",
   "startTransaction": "قم بالتحويل",
   "enjoyOurServices": "استمتع بخدمتنا",
-  "subscriptionsSteps": "خطوات الإشتراك"
+  "subscriptionsSteps": "خطوات الإشتراك",
+  "avilablePackages": "الباقات المتاحة",
+  "avilablePlans": "خطط الإشتراك",
+  "ryalPerMonth": "ريال/شهريًا",
+  "planFeatures": "مميزات الخطة",
+  "subscripeInPlan": "الإشتراك في الخطة",
+  "testimonials": "أراء العملاء",
+  "commenQuestions": "الأسئلة الشائعة",
+  "termsCondtions": "شروط الاستخدام",
+  "privacy": "سياسة الخصوصية",
+  "packages": "الباقات",
+  "plans": "الخطط",
+  "offers": "العروض",
+  "faq": "الأسئلة",
+  "socialMedia": "وسائل التواصل",
+  "plan": "الخطة"
 }

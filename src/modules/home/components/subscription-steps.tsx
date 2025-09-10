@@ -11,8 +11,14 @@ export default async function SubscriptionSteps() {
       icon: '/home/subscription-steps/headphone-svg.svg',
     },
     {
+      img: '/home/subscription-steps/arrow-svg.svg',
+    },
+    {
       label: t('startTransaction'),
       icon: '/home/subscription-steps/wallet-svg.svg',
+    },
+    {
+      img: '/home/subscription-steps/arrow-svg.svg',
     },
     {
       label: t('contact-us'),
@@ -22,16 +28,32 @@ export default async function SubscriptionSteps() {
   return (
     <section className="container mx-auto px-4">
       <SectionHeader sectionHeader={t('subscriptionsSteps')} />
-      <ul className="flex justify-between items-center ">
-        {steps.map((step, index) => (
-          <div className="flex justify-between items-center" key={step.label}>
-            <li className="bg-[#262626] gap-11 flex flex-col items-center rounded-xl p-12">
-              <ImageFallBack alt={step.label} src={step.icon} width={101} height={103} />
-              <p className="text-white font-semibold text-lg">{step.label}</p>
-            </li>
-            {steps.length - 1 > index && <p className="text-white">hello</p>}
-          </div>
-        ))}
+      <ul className="flex justify-between items-center flex-wrap gap-4">
+        {steps.map((step, index) => {
+          if (step?.img) {
+            // arrows
+            return (
+              <li
+                key={`arrow-${index}`}
+                className="relative w-64 h-32 hidden xl:block flex-shrink-0"
+              >
+                <ImageFallBack alt="Arrow" src={step.img} fill className="object-contain" />
+              </li>
+            )
+          } else if (step.label) {
+            return (
+              <li
+                key={step.label}
+                className="bg-[#262626] gap-6 flex flex-col items-center rounded-xl p-6 sm:p-12 relative flex-shrink-0"
+              >
+                <ImageFallBack alt={step.label} src={step.icon} width={80} height={80} />
+                <p className="text-white font-semibold text-base sm:text-lg text-center">
+                  {step.label}
+                </p>
+              </li>
+            )
+          }
+        })}
       </ul>
     </section>
   )

@@ -13,6 +13,11 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Settings } from './globals/Settings'
 import { HeroSlides } from './collections/HeroSlides'
+import { Packages } from './collections/Packages'
+import { Plans } from './collections/Plans'
+import { Testimonial } from './collections/Testimonial'
+import { Banners } from './collections/Banners'
+import { Faq } from './collections/Faq'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -25,7 +30,7 @@ export default buildConfig({
     },
   },
   globals: [Settings],
-  collections: [Users, Media, HeroSlides],
+  collections: [Users, Media, HeroSlides, Packages, Plans, Testimonial, Banners, Faq],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
