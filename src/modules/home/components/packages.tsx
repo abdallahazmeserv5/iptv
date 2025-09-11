@@ -55,7 +55,7 @@ export default function Packages({ packages }: HeroProps) {
           }),
         ]}
         setApi={setApi}
-        className="w-full h-full relative  "
+        className="w-full h-full relative"
         opts={{
           align: 'center',
           loop: true,
@@ -68,13 +68,13 @@ export default function Packages({ packages }: HeroProps) {
             return (
               <CarouselItem
                 key={index}
-                className="basis-[270px] shrink-0 h-full bg-[#262626] p-8  rounded-2xl me-5 group cursor-pointer"
+                className="basis-[270px] shrink-0 h-full bg-[#262626] p-8 flex flex-col items-center rounded-2xl me-5 group cursor-pointer"
               >
                 <ImageFallBack
                   alt={img.alt}
-                  width={214}
-                  height={221}
-                  className="object-cover w-full h-full transform transition-transform duration-300 group-hover:scale-110"
+                  width={180}
+                  height={185}
+                  className="object-contain transform transition-transform duration-300 group-hover:scale-110 w-[150px] h-[150px]"
                   src={img.url || ''}
                 />
                 <p className="text-white font-semibold text-lg group-hover:text-primary">

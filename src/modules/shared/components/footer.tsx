@@ -32,10 +32,10 @@ export default async function Footer({ settings }: Props) {
   ]
 
   return (
-    <footer className="bg-black ">
+    <footer className="bg-black mb-16 lg:mb-0">
       <div className=" container mx-auto px-4 pt-10">
         {/* first part */}
-        <div className="container mx-auto px-4 grid grid-cols-4 my-5">
+        <div className="container mx-auto px-4 grid grid-cols-2 lg:grid-cols-4 gap-4 my-5">
           {/* first col */}
           <div className="">
             <h3 className="text-primary font-semibold text-lg">{t('homePage')}</h3>

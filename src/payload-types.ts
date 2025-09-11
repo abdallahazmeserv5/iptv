@@ -63,10 +63,12 @@ export type SupportedTimezones =
 
 export interface Config {
   auth: {
+    admins: AdminAuthOperations;
     users: UserAuthOperations;
   };
   blocks: {};
   collections: {
+    admins: Admin;
     users: User;
     media: Media;
     'hero-slides': HeroSlide;
@@ -81,6 +83,7 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
+    admins: AdminsSelect<false> | AdminsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     'hero-slides': HeroSlidesSelect<false> | HeroSlidesSelect<true>;
@@ -103,12 +106,34 @@ export interface Config {
     settings: SettingsSelect<false> | SettingsSelect<true>;
   };
   locale: 'en' | 'ar';
-  user: User & {
-    collection: 'users';
-  };
+  user:
+    | (Admin & {
+        collection: 'admins';
+      })
+    | (User & {
+        collection: 'users';
+      });
   jobs: {
     tasks: unknown;
     workflows: unknown;
+  };
+}
+export interface AdminAuthOperations {
+  forgotPassword: {
+    email: string;
+    password: string;
+  };
+  login: {
+    email: string;
+    password: string;
+  };
+  registerFirstUser: {
+    email: string;
+    password: string;
+  };
+  unlock: {
+    email: string;
+    password: string;
   };
 }
 export interface UserAuthOperations {
@@ -131,9 +156,9 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
+ * via the `definition` "admins".
  */
-export interface User {
+export interface Admin {
   id: string;
   updatedAt: string;
   createdAt: string;
@@ -152,6 +177,23 @@ export interface User {
       }[]
     | null;
   password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
+export interface User {
+  id: string;
+  /**
+   * E.164 format, e.g. +201234567890
+   */
+  phone: string;
+  phoneVerified?: boolean | null;
+  otp?: string | null;
+  otpExpiresAt?: string | null;
+  otpResendAfter?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -214,10 +256,36 @@ export interface Plan {
   id: string;
   title?: string | null;
   price?: number | null;
+  priceBeforeDiscount?: number | null;
+  image?: (string | null) | Media;
   description?: string | null;
+  numberOfSubscriptions?: number | null;
   features?:
     | {
         feature?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  reviews?:
+    | {
+        testimonial?:
+          | {
+              image: string | Media;
+              reviewer?: string | null;
+              reviewerCountry?: string | null;
+              review?: string | null;
+              rate?: number | null;
+              hasReviewd?: boolean | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  downloadPlatForms?:
+    | {
+        title?: string | null;
+        platFormImage?: (string | null) | Media;
         id?: string | null;
       }[]
     | null;
@@ -302,6 +370,10 @@ export interface PayloadLockedDocument {
   id: string;
   document?:
     | ({
+        relationTo: 'admins';
+        value: string | Admin;
+      } | null)
+    | ({
         relationTo: 'users';
         value: string | User;
       } | null)
@@ -334,10 +406,15 @@ export interface PayloadLockedDocument {
         value: string | Faq;
       } | null);
   globalSlug?: string | null;
-  user: {
-    relationTo: 'users';
-    value: string | User;
-  };
+  user:
+    | {
+        relationTo: 'admins';
+        value: string | Admin;
+      }
+    | {
+        relationTo: 'users';
+        value: string | User;
+      };
   updatedAt: string;
   createdAt: string;
 }
@@ -347,10 +424,15 @@ export interface PayloadLockedDocument {
  */
 export interface PayloadPreference {
   id: string;
-  user: {
-    relationTo: 'users';
-    value: string | User;
-  };
+  user:
+    | {
+        relationTo: 'admins';
+        value: string | Admin;
+      }
+    | {
+        relationTo: 'users';
+        value: string | User;
+      };
   key?: string | null;
   value?:
     | {
@@ -377,9 +459,9 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users_select".
+ * via the `definition` "admins_select".
  */
-export interface UsersSelect<T extends boolean = true> {
+export interface AdminsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -396,6 +478,19 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users_select".
+ */
+export interface UsersSelect<T extends boolean = true> {
+  phone?: T;
+  phoneVerified?: T;
+  otp?: T;
+  otpExpiresAt?: T;
+  otpResendAfter?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -451,11 +546,37 @@ export interface PackagesSelect<T extends boolean = true> {
 export interface PlansSelect<T extends boolean = true> {
   title?: T;
   price?: T;
+  priceBeforeDiscount?: T;
+  image?: T;
   description?: T;
+  numberOfSubscriptions?: T;
   features?:
     | T
     | {
         feature?: T;
+        id?: T;
+      };
+  reviews?:
+    | T
+    | {
+        testimonial?:
+          | T
+          | {
+              image?: T;
+              reviewer?: T;
+              reviewerCountry?: T;
+              review?: T;
+              rate?: T;
+              hasReviewd?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  downloadPlatForms?:
+    | T
+    | {
+        title?: T;
+        platFormImage?: T;
         id?: T;
       };
   updatedAt?: T;

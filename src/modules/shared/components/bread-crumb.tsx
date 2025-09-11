@@ -33,10 +33,8 @@ export default async function BreadCrumb({ image, title, links }: Props) {
             ))}
           </ul>
           {/* main title */}
-          <h1 className="font-bold text-6xl text-primary">
-            <span className="text-white">{t('subscriptions')}</span>
-
-            {title}
+          <h1 className="font-bold text-xl sm:text-3xl xl:text-6xl text-primary">
+            <span className="text-white">{t('subscriptions')}</span> {title}
           </h1>
         </div>
       </div>

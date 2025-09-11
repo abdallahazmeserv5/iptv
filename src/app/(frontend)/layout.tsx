@@ -6,6 +6,7 @@ import React from 'react'
 import Providers from './providers'
 import './styles.css'
 import Footer from '@/modules/shared/components/footer'
+import { Toaster } from '@/components/ui/sonner'
 
 export const metadata = {
   description: 'A blank template using Payload in a Next.js app.',
@@ -31,6 +32,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
             <Navbar settings={settings} />
             <main>{children}</main>
             <Footer settings={settings} />
+            <Toaster richColors closeButton />
           </body>
           {/* <ReactQueryDevtools initialIsOpen={false} /> */}
         </NextIntlClientProvider>

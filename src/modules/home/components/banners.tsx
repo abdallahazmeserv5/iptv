@@ -31,7 +31,6 @@ export default function Banners({ banners }: Props) {
   const dir = lang === 'ar' ? 'rtl' : 'ltr'
 
   const slideItems = banners.docs[0].banners
-  console.log({ slideItems })
 
   useEffect(() => {
     if (!api) {
@@ -61,11 +60,11 @@ export default function Banners({ banners }: Props) {
           direction: dir,
         }}
       >
-        <CarouselContent className="w-full h-96  ">
+        <CarouselContent className="w-full h-64 lg:h-80  ">
           {slideItems?.map((slideItem, index) => {
             const mainImg = slideItem.image as Media
             return (
-              <CarouselItem key={index} className="w-full h-96">
+              <CarouselItem key={index} className="w-full h-64 lg:h-80  ">
                 <div className="relative w-full h-full">
                   <ImageFallBack
                     alt={mainImg?.alt || 'Website preview'}

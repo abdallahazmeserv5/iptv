@@ -23,5 +23,22 @@
   "offers": "العروض",
   "faq": "الأسئلة",
   "socialMedia": "وسائل التواصل",
-  "plan": "الخطة"
+  "plan": "الخطة",
+  "sar": "ريال",
+  "addToCart": "أضف للسلة",
+  "buy": "شراء",
+  "whatsApp": "تواصل واتس اب",
+  "numberOfBought": "عدد مرات الشراء",
+  "subscriptionDescription": "وصف الإشتراك",
+  "reviews": "التقييمات",
+  "downloadPlatForms": "منصات التحميل",
+  "signin": "تسجيل الدخول",
+  "enterYourPhone": "لتسجيل الدخول أضف جوالك أدناه وسيتم إرسال رسالة نصية للتحقق من الرقم",
+  "sendOtp": "إرسال رمز التحقق",
+  "phoneNumber": "رقم الهاتف",
+  "enterValidPhoneNumber": "ادخل رقم هاتف صالح",
+  "enterValidOTP": "ادخل كود صحيح",
+  "confrimPhoneNumber": "تأكيد رقم الجوال",
+  "otpSent": "تم إرسال رمز التحقق الي الرقم",
+  "confirmNumber": "رمز التحقق"
 }

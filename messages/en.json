@@ -23,5 +23,22 @@
   "offers": "Offers",
   "faq": "FAQ",
   "socialMedia": "Social Media",
-  "plan": "Plan"
+  "plan": "Plan",
+  "sar": "SAR",
+  "addToCart": "Add to cart",
+  "buy": "Buy",
+  "whatsApp": "Contact whatsapp",
+  "numberOfBought": "Number of purchases",
+  "subscriptionDescription": "Subscription Description",
+  "reviews": "Reviews",
+  "downloadPlatForms": "Download PlatForms",
+  "signin": "Sign in",
+  "enterYourPhone": "To log in add your phone number and you will recive an otp on WhatsApp",
+  "sendOtp": "Send OTP",
+  "phoneNumber": "Phone number",
+  "enterValidPhoneNumber": "Enter valid phone number",
+  "enterValidOTP": "Enter valid otp",
+  "confrimPhoneNumber": "Confirm phone number",
+  "otpSent": "Otp was sent to ",
+  "confirmNumber": "Confrim number"
 }

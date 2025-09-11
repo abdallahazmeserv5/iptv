@@ -16,7 +16,6 @@ interface Props {
 }
 
 export default async function FaqSection({ faqs }: Props) {
-  console.log({ faqs })
   const t = await getTranslations('')
   return (
     <section className="container mx-auto px-4">

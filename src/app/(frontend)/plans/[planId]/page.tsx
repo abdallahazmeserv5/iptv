@@ -1,4 +1,6 @@
 import { configuredPayload } from '@/actions'
+import Banners from '@/modules/home/components/banners'
+import PlanDetails from '@/modules/palns/components/plan-details'
 import BreadCrumb from '@/modules/shared/components/bread-crumb'
 import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
@@ -12,17 +14,23 @@ export default async function page({ params }: Props) {
   const t = await getTranslations()
   const payload = await configuredPayload()
 
-  const planDetails = await payload.findByID({
-    collection: 'plans',
-    id: planId,
-  })
-  console.log({ planDetails })
+  const [banners, planDetails] = await Promise.all([
+    payload.find({
+      collection: 'banners',
+    }),
+    payload.findByID({
+      collection: 'plans',
+      id: planId,
+    }),
+  ])
 
   if (!planDetails) {
     return notFound()
   }
+  console.log({ planDetails })
+
   return (
-    <main>
+    <main className="bg-black flex flex-col gap-5 lg:gap-10 pt-5">
       <BreadCrumb
         image={'/bread-crumb-image.webp'}
         links={[
@@ -33,6 +41,8 @@ export default async function page({ params }: Props) {
         ]}
         title={planDetails.title || ''}
       />
+      <PlanDetails planDetails={planDetails} />
+      <Banners banners={banners} />
     </main>
   )
 }

@@ -18,19 +18,23 @@ import { Plans } from './collections/Plans'
 import { Testimonial } from './collections/Testimonial'
 import { Banners } from './collections/Banners'
 import { Faq } from './collections/Faq'
+import { Admins } from './collections/Admins'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
   admin: {
-    user: Users.slug,
+    user: Admins.slug,
     importMap: {
       baseDir: path.resolve(dirname),
     },
   },
+  // Allow browser requests from your Next.js app (dev)
+  cors: [process.env.NEXT_PUBLIC_APP_ORIGIN || 'http://localhost:3000'],
+  csrf: [process.env.NEXT_PUBLIC_APP_ORIGIN || 'http://localhost:3000'],
   globals: [Settings],
-  collections: [Users, Media, HeroSlides, Packages, Plans, Testimonial, Banners, Faq],
+  collections: [Admins, Users, Media, HeroSlides, Packages, Plans, Testimonial, Banners, Faq],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -60,6 +64,7 @@ export default buildConfig({
     url: process.env.DATABASE_URI || '',
   }),
   sharp,
+
   plugins: [
     payloadCloudPlugin(),
     // storage-adapter-placeholder
